@@ -1,0 +1,5 @@
+<% if defined?(flash) && flash.respond_to?(:each) %>
+  <% flash.each do |type, message| %>
+    <div class="flash flash-<%= type %>" style="margin: 0.75rem 1.25rem 0;"><%= message %></div>
+  <% end %>
+<% end %>

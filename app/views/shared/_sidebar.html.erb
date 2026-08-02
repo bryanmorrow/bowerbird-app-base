@@ -1,0 +1,26 @@
+<aside class="app-sidebar" data-sidebar-target="panel" id="app-sidebar">
+  <a href="/" class="app-sidebar-brand">
+    <span class="app-sidebar-mark"><%= (ENV["APP_NAME"].presence || "A").to_s[0] %></span>
+    <span>
+      <span class="block text-sm font-semibold tracking-tight" style="color: var(--color-ink-100);"><%= ENV["APP_NAME"].presence || "App" %></span>
+    </span>
+  </a>
+
+  <nav class="app-sidebar-nav" aria-label="Main">
+    <div class="nav-group">
+      <div class="nav-group-label">Overview</div>
+      <%= link_to "Dashboard", root_path, class: ["nav-link", (current_page?(root_path) ? "is-active" : nil)].compact.join(" ") %>
+    </div>
+    <% if user_signed_in? && current_user.admin? %>
+      <div class="nav-group">
+        <div class="nav-group-label">Admin</div>
+        <%= link_to "Users", users_path, class: ["nav-link", (current_page?(users_path) ? "is-active" : nil)].compact.join(" ") %>
+      </div>
+    <% end %>
+  </nav>
+
+  <div class="app-sidebar-foot">
+    <div class="font-mono text-[0.65rem]" style="color: var(--color-ink-400);"><%= ENV["APP_NAME"].presence || "App" %></div>
+  </div>
+</aside>
+<div class="sidebar-backdrop" data-sidebar-target="backdrop" data-action="click->sidebar#close"></div>

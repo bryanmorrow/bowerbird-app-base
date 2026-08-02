@@ -1,0 +1,23 @@
+<% content_for :title, "Dashboard — #{@app_name}" %>
+
+<%= render "shared/page_header",
+      title: "Dashboard",
+      subtitle: "Overview of #{@app_name}",
+      kicker: "Home" %>
+
+<div class="grid-metrics mb-6">
+  <div class="metric-card">
+    <div class="metric-label">Status</div>
+    <div class="metric-value text-base">Ready</div>
+    <div class="metric-hint">Your app foundation is live</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="section-title">Getting started</h2>
+  </div>
+  <p class="m-0 text-sm" style="color: var(--color-ink-400);">
+    Build domain features on this shell. Use page headers, cards, tables, and forms from the design system.
+  </p>
+</div>

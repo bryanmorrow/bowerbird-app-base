@@ -1,0 +1,24 @@
+<% content_for :title, "Users" %>
+<% content_for :page_actions do %>
+  <%= link_to "Add user", new_user_path, class: "btn btn-primary btn-sm" %>
+<% end %>
+<%= render "shared/page_header", title: "Users", subtitle: "People who can sign in" %>
+<div class="card card-flush">
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Role</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %><% if user.admin? %> <span class="badge badge-brand">admin</span><% end %></td>
+            <td class="font-mono text-sm"><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td class="num"><%= link_to "Edit", edit_user_path(user), class: "btn btn-ghost btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
