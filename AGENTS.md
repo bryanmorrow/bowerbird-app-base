@@ -22,14 +22,14 @@ described in `docs/PROJECT_BRIEF.md` (written per project by Bowerbird).
 ## Auth
 
 - Devise sessions; `authenticate_user!` when `AUTH_REQUIRED=true` (default)
-- Owner admin seeded from `BOWERBIRD_OWNER_*` env vars
-- Preview auto-login: `GET /bowerbird/enter` (HMAC with `BOWERBIRD_PREVIEW_SECRET`)
-- Admin user management at `/users`
+- Owner admin is created at **runtime** by `GET /bowerbird/enter` (not via automatic `db:seed`)
+- Preview auto-login: HMAC with `BOWERBIRD_PREVIEW_SECRET`
+- Admin user management at `/users` when required
 
 ## Do
 
 - Implement domain models, migrations, controllers, views on this shell
-- Seed realistic demo data + keep owner admin seed
+- Prefer calm **empty states** — do not seed demo/sample product data unless the customer asks
 - Keep `/up` green
 - Append notes to `docs/BUILD_LOG.md`
 
@@ -37,5 +37,7 @@ described in `docs/PROJECT_BRIEF.md` (written per project by Bowerbird).
 
 - Switch frameworks, hosts, or auth systems without instruction
 - Strip Devise, product shell, or `/design/app.css`
+- Auto-seed demo/sample/fixture product data
+- Auto-run `db:seed` on boot/deploy
 - Ship placeholders ("coming soon"), CSS class jargon, or raw interview text in UI
 - Commit secrets

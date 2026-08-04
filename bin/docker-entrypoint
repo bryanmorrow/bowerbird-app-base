@@ -1,8 +1,7 @@
 #!/bin/bash -e
+# Prepare schema only. Do NOT auto-run db:seed — demo data is never loaded unless
+# the customer explicitly asks. Owner admin is created at runtime via /bowerbird/enter.
 if echo "$*" | grep -q "rails server"; then
   ./bin/rails db:prepare 2>/dev/null || true
-  if [ -n "${BOWERBIRD_OWNER_EMAIL:-}" ]; then
-    ./bin/rails db:seed 2>/dev/null || true
-  fi
 fi
 exec "$@"
