@@ -1,4 +1,4 @@
-/* Bowerbird product shell — base template
+/* Bowerbird example design foundation — base template
    Marker: product-shell-v2
    DO NOT DELETE. Feature views use these classes. */
 :root {
@@ -38,7 +38,7 @@
 }
 
 /* =============================================================================
-   Bowerbird product shell — customer apps (Gilded Kestrel–grade UI kit)
+   Bowerbird example design kit — customer apps (Gilded Kestrel–grade UI kit)
    Installed BEFORE feature code. Do not delete. Build views on top of this.
    Tokens are injected at the top of application.css by DesignFoundation.
    ============================================================================= */
