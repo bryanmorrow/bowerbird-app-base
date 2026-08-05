@@ -7,7 +7,7 @@ Shared across Gilded Kestrel, Heritage Rampart, Resurgent Eagle patterns:
 | Framework | Rails 8.1 |
 | Assets | Propshaft + importmap |
 | Interactivity | Turbo + Stimulus (Hotwire) |
-| CSS | Product shell tokens + Tailwind utilities |
+| CSS | Example theme tokens + Tailwind utilities (layout adaptive per product) |
 | Auth | Devise |
 | DB | Postgres (DATABASE_URL), sqlite local fallback |
 | Host | Railway (Dockerfile) |

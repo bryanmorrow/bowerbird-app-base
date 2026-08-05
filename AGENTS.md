@@ -7,18 +7,24 @@ described in `docs/PROJECT_BRIEF.md` (written per project by Bowerbird).
 
 - **Rails 8.1** + Puma + Propshaft
 - **Hotwire**: Turbo + Stimulus + importmap
-- **Tailwind CSS** (utilities; `preflight: false` when using CDN) + **product shell** at `/design/app.css`
+- **Tailwind CSS** (utilities; `preflight: false` when using CDN) + **theme CSS** at `/design/app.css`
 - **Devise** for authentication (User model)
 - **Postgres** via `DATABASE_URL` (sqlite fallback if unset)
 - **Railway** (`Dockerfile`, `railway.toml`)
 - **Grok (xAI)** for product AI via `GrokClient` + `app/agents/*` (see `docs/AI.md`)
 
-## Design system
+## Design (example — adapt to the product)
 
-- Layout: `app-shell` + `shared/_sidebar` + topbar + `app-content`
-- Components: `.btn`, `.card`, `.metric-card`, `table.data`, `.badge`, `page_header`
-- Theme: `public/design/app.css` linked as `/design/app.css` — **do not remove**
-- Quality bar: modern ops desk (Gilded Kestrel–grade), never Rails scaffold HTML
+The base includes an **example** layout and component kit so greenfield builds start polished.
+**Layout and visual design should fit this product** (needs, scope, audience) — do not blindly
+copy the template sidebar shell for every app.
+
+- Example chrome: `app-shell` + `shared/_sidebar` + topbar + `app-content` (optional pattern)
+- Example components: `.btn`, `.card`, `.metric-card`, `table.data`, `.badge`, `page_header`
+- Theme: `public/design/app.css` linked as `/design/app.css` — keep a real theme with tokens
+- Tailwind + theme CSS are required practices; **exact layout is not**
+- Quality bar: polished, domain-appropriate product UI — never Rails scaffold HTML
+- Read `docs/DESIGN.md` for the example kit and adaptive guidance
 
 ## Auth
 
@@ -38,7 +44,7 @@ When the product needs generative AI, use the **built-in Grok agent kit** — se
 
 ## Do
 
-- Implement domain models, migrations, controllers, views on this shell
+- Implement domain models, migrations, controllers, views tailored to this product
 - Prefer calm **empty states** — do not seed demo/sample product data unless the customer asks
 - Keep `/up` green
 - Append notes to `docs/BUILD_LOG.md`
@@ -47,9 +53,10 @@ When the product needs generative AI, use the **built-in Grok agent kit** — se
 ## Do not
 
 - Switch frameworks, hosts, or auth systems without instruction
-- Strip Devise, product shell, or `/design/app.css`
+- Strip Devise or leave the app without a real theme stylesheet
 - Auto-seed demo/sample product data
 - Auto-run `db:seed` on boot/deploy
 - Ship placeholders ("coming soon"), CSS class jargon, or raw interview text in UI
+- Force the example sidebar shell when a different layout fits the product better
 - Commit secrets
 - Pretend to use AI (template landing pages, hardcoded “generated” copy) when the customer asked for Grok/agents
