@@ -6,12 +6,24 @@ described in `docs/PROJECT_BRIEF.md` (written per project by Bowerbird).
 ## Stack (fixed — do not replace)
 
 - **Rails 8.1** + Puma + Propshaft
-- **Hotwire**: Turbo + Stimulus + importmap
+- **Hotwire**: Turbo + Stimulus + importmap (**must stay fully wired** — see below)
 - **Tailwind CSS** (utilities; `preflight: false` when using CDN) + **theme CSS** at `/design/app.css`
 - **Devise** for authentication (User model)
 - **Postgres** via `DATABASE_URL` (sqlite fallback if unset)
 - **Railway** (`Dockerfile`, `railway.toml`)
 - **Grok (xAI)** for product AI via `GrokClient` + `app/agents/*` (see `docs/AI.md`)
+
+## Hotwire / Stimulus (required — keep working even unused)
+
+The JS stack must load on every HTML layout so future features can add controllers without re-scaffolding.
+
+- Gems: `importmap-rails`, `turbo-rails`, `stimulus-rails`
+- `config/importmap.rb` pins turbo/stimulus and `pin_all_from "app/javascript/controllers"`
+- `app/javascript/application.js` imports `@hotwired/turbo-rails` and `controllers`
+- `app/javascript/controllers/application.js` + `index.js` (eager-load `*_controller.js`)
+- Layouts include `<%= javascript_importmap_tags %>` — **never remove**
+- Add interactivity as `app/javascript/controllers/*_controller.js` (auto-registered)
+- Do **not** replace Stimulus with ad-hoc global script tags for app logic
 
 ## Design (example — adapt to the product)
 

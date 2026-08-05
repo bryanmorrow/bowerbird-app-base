@@ -11,6 +11,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { corePlugins: { preflight: false } }</script>
     <link rel="stylesheet" href="/design/app.css" data-bb-theme="product-shell-v2">
+    <%# Hotwire: Turbo + Stimulus via importmap (required — do not remove) %>
+    <%= javascript_importmap_tags %>
   </head>
   <body class="h-full font-sans" style="background: var(--color-bg); color: var(--color-ink-100);">
     <div class="min-h-full flex items-center justify-center p-6">
