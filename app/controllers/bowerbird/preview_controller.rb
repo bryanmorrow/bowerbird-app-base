@@ -36,7 +36,11 @@ module Bowerbird
       user.admin = true
       user.save!
 
-      sign_in(user)
+      # remember_me: durable cookie so redeploys don't force another Open live app.
+      if user.respond_to?(:remember_me=)
+        user.remember_me = true
+      end
+      sign_in(user, remember_me: true)
       redirect_to root_path, notice: "Signed in as #{user.display_name}."
     rescue StandardError => e
       Rails.logger.error("[Bowerbird::Preview] #{e.class}: #{e.message}")
