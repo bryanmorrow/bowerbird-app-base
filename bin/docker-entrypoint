@@ -1,7 +1,18 @@
 #!/bin/bash -e
 # Prepare schema only. Do NOT auto-run db:seed — demo data is never loaded unless
 # the customer explicitly asks. Owner admin is created at runtime via /bowerbird/enter.
+#
+# Production requires DATABASE_URL (durable Postgres). Container-local SQLite is wiped
+# on every redeploy and must never be used for customer data.
 if echo "$*" | grep -q "rails server"; then
-  ./bin/rails db:prepare 2>/dev/null || true
+  if [ "${RAILS_ENV:-}" = "production" ] || [ "${RAILS_ENV:-}" = "" ]; then
+    if [ -z "${DATABASE_URL:-}" ]; then
+      echo "FATAL: DATABASE_URL is not set. Refusing to boot production on disposable storage." >&2
+      echo "Attach Railway Postgres and set DATABASE_URL (e.g. \${{Postgres.DATABASE_URL}})." >&2
+      exit 1
+    fi
+  fi
+  # Never use db:drop / db:reset / db:schema:load --force here.
+  ./bin/rails db:prepare
 fi
 exec "$@"

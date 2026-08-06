@@ -11,13 +11,10 @@ test:
   adapter: sqlite3
   database: storage/test.sqlite3
 
+# Production MUST use a durable Postgres DATABASE_URL (Railway Postgres, etc.).
+# SQLite in the container is wiped on every deploy — never fall back to it here.
 production:
   <<: *default
-  <% if ENV["DATABASE_URL"].present? %>
   adapter: postgresql
   encoding: unicode
-  url: <%= ENV["DATABASE_URL"] %>
-  <% else %>
-  adapter: sqlite3
-  database: storage/production.sqlite3
-  <% end %>
+  url: <%= ENV.fetch("DATABASE_URL") %>
