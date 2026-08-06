@@ -9,9 +9,18 @@ described in `docs/PROJECT_BRIEF.md` (written per project by Bowerbird).
 - **Hotwire**: Turbo + Stimulus + importmap (**must stay fully wired** — see below)
 - **Tailwind CSS** (utilities; `preflight: false` when using CDN) + **theme CSS** at `/design/app.css`
 - **Devise** for authentication (User model)
-- **Postgres** via `DATABASE_URL` (sqlite fallback if unset)
-- **Railway** (`Dockerfile`, `railway.toml`)
+- **Postgres** via `DATABASE_URL` in production (**required** — see `docs/DATABASE.md`)
+- **Railway** (`Dockerfile`, `railway.toml`) with Postgres service + volume
 - **Grok (xAI)** for product AI via `GrokClient` + `app/agents/*` (see `docs/AI.md`)
+
+## Database (required — durable Postgres)
+
+Marker: `bowerbird-database-v1`. Read `docs/DATABASE.md`.
+
+- Production: Postgres only via `DATABASE_URL` (Railway Postgres + volume)
+- Never use container SQLite in production (wiped on every deploy)
+- Boot fails without `DATABASE_URL`; entrypoint runs `db:prepare` only (never drop/reset)
+- Do not run `db:drop`, `db:reset`, or forced `schema:load` on deploy
 
 ## Hotwire / Stimulus (required — keep working even unused)
 

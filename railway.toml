@@ -8,3 +8,9 @@ healthcheckPath = "/up"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
+
+# Bowerbird database foundation (bowerbird-database-v1):
+# - Web service MUST have DATABASE_URL=${{Postgres.DATABASE_URL}}
+# - Project MUST include a Postgres service with a persistent volume
+# - Never run production on SQLite / container storage
+# Bowerbird provisions Postgres automatically; do not remove DATABASE_URL.

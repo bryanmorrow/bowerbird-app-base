@@ -9,9 +9,18 @@ Shared across Gilded Kestrel, Heritage Rampart, Resurgent Eagle, Bowerbird, Corv
 | Interactivity | Turbo + Stimulus (Hotwire) — **fully wired by default** |
 | CSS | Example theme tokens + Tailwind utilities (layout adaptive per product) |
 | Auth | Devise |
-| DB | Postgres (DATABASE_URL), sqlite local fallback |
-| Host | Railway (Dockerfile) |
+| DB | **Postgres required in production** (`DATABASE_URL`); sqlite only for local/dev |
+| Host | Railway (Dockerfile + `railway.toml`) |
 | Jobs | Optional Sidekiq/Redis when needed (add per project) |
+
+## Database (production)
+
+See **`docs/DATABASE.md`**.
+
+- Railway **Postgres** service + **volume** (durable)
+- Web: `DATABASE_URL=${{Postgres.DATABASE_URL}}`
+- Boot refuses to start without Postgres `DATABASE_URL`
+- Never store production data in container SQLite (`storage/`)
 
 ## Hotwire wiring checklist
 
