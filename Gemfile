@@ -9,7 +9,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails"
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 # Action Cable production pubsub (config/cable.yml adapter: redis)
 gem "redis", ">= 4.0.1"
 gem "bootsnap", require: false
